@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PaymentTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CodeCoverageReport</a> &gt; <a href="index.source.html" class="el_package">ltu</a> &gt; <span class="el_source">PaymentTest.java</span></div><h1>PaymentTest.java</h1><pre class="source lang-java linenums">package ltu;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import org.junit.Before;
+import org.junit.Test;
+
+<span class="fc" id="L9">public class PaymentTest</span>
+{
+<span class="fc" id="L11">    private PaymentImpl test = null;</span>
+
+    @Before
+    public void start() throws IOException
+    {
+<span class="fc" id="L16">        test = new PaymentImpl(new CalendarImpl());</span>
+<span class="fc" id="L17">    }</span>
+
+<span class="fc" id="L19">    @Test</span>
+<span class="fc" id="L20">    public void testSilly()</span>
+<span class="fc" id="L21">    {</span>
+<span class="fc" id="L22">        assertEquals(1, 1);</span>
+<span class="fc" id="L23">    }</span>
+
+<span class="fc" id="L25">    @Test</span>
+    public void testTheStudentOld101()
+    {
+<span class="fc" id="L28">        assertEquals(0, test.getMonthlyAmount(&quot;20060323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L29">        assertEquals(9904, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L30">    }</span>
+
+    @Test
+    public void testTheStudentOld102()
+    {
+<span class="fc" id="L35">        assertEquals(2816, test.getMonthlyAmount(&quot;19690323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L36">        assertEquals(0, test.getMonthlyAmount(&quot;19650323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L37">    }</span>
+
+    @Test
+    public void testTheStudentOld103()
+    {
+<span class="fc" id="L42">        assertEquals(9904, test.getMonthlyAmount(&quot;19790323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L43">        assertEquals(2816, test.getMonthlyAmount(&quot;19760323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L44">    }</span>
+
+   @Test
+    public void testTheStudyPaceReq201()
+    {
+<span class="fc" id="L49">        assertEquals(0, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 0, 90));</span>
+<span class="fc" id="L50">        assertEquals(9904, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L51">    }</span>
+
+    @Test
+    public void testTheStudyPaceReq202()
+    {
+<span class="fc" id="L56">        assertEquals(4960, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 50, 90));</span>
+<span class="fc" id="L57">        assertEquals(0, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 0, 90));</span>
+<span class="fc" id="L58">    }</span>
+
+    @Test
+    public void testTheStudyPaceReq203()
+    {
+<span class="fc" id="L63">        assertEquals(4960, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 50, 90));</span>
+<span class="fc" id="L64">        assertEquals(9904, test.getMonthlyAmount(&quot;20040323-1221&quot;, 0, 100, 90));</span>
+<span class="fc" id="L65">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
