@@ -23,48 +23,79 @@ public class PaymentTest
     }
 
     @Test
-    public void testTheStudentOld101()
+    public void test101TheStudentIsOver20()
     {
         assertEquals(0, test.getMonthlyAmount("20060323-1221", 0, 100, 90));
+    }
+
+    @Test
+    public void test101TheStudentIsUnder20()
+    {
         assertEquals(9904, test.getMonthlyAmount("20040323-1221", 0, 100, 90));
     }
 
     @Test
-    public void testTheStudentOld102()
+    public void test102TheStudentUnder56()
     {
         assertEquals(2816, test.getMonthlyAmount("19690323-1221", 0, 100, 90));
-        assertEquals(0, test.getMonthlyAmount("19650323-1221", 0, 100, 90));
     }
 
     @Test
-    public void testTheStudentOld103()
+    public void test102TheStudentOver56()
+    {
+        assertEquals(0, test.getMonthlyAmount("19650323-1221", 0, 100, 90));
+    }
+    
+    @Test
+    public void test103TheStudentIsUnder47()
     {
         assertEquals(9904, test.getMonthlyAmount("19790323-1221", 0, 100, 90));
+    }
+
+    @Test
+    public void test103TheStudentIsOver47()
+    {
         assertEquals(2816, test.getMonthlyAmount("19760323-1221", 0, 100, 90));
     }
 
+    @Test
+    public void test103TheStudentIs47()
+    {
+        assertEquals(2816, test.getMonthlyAmount("19771111-1221", 0, 100, 90));
+    }
+
+
    @Test
-    public void testTheStudyPaceReq201()
+    public void test201TheStudyPaceUnder50()
     {
-        assertEquals(0, test.getMonthlyAmount("20040323-1221", 0, 0, 90));
-        assertEquals(9904, test.getMonthlyAmount("20040323-1221", 0, 100, 90));
-    }
-
-    @Test
-    public void testTheStudyPaceReq202()
-    {
-        assertEquals(4960, test.getMonthlyAmount("20040323-1221", 0, 50, 90));
         assertEquals(0, test.getMonthlyAmount("20040323-1221", 0, 0, 90));
     }
 
     @Test
-    public void testTheStudyPaceReq203()
+    public void test201TheStudyPaceOver50()
     {
-        assertEquals(4960, test.getMonthlyAmount("20040323-1221", 0, 50, 90));
         assertEquals(9904, test.getMonthlyAmount("20040323-1221", 0, 100, 90));
     }
 
-        @Test
+    @Test
+    public void test202TheStudyPaceIs50()
+    {
+        assertEquals(4960, test.getMonthlyAmount("20040323-1221", 0, 50, 90));
+    }
+
+    @Test
+    public void test202TheStudyPaceIs75()
+    {
+        assertEquals(4960, test.getMonthlyAmount("20040323-1221", 0, 75, 90));
+    }
+
+    @Test
+    public void test203TheStudyPace100()
+    {
+        assertEquals(9904, test.getMonthlyAmount("20040323-1221", 0, 100, 90));
+    }
+
+    @Test
     public void testFullTimeMaxIncome85812Sek301()
     {
         assertEquals(7088+2816, test.getMonthlyAmount("20040323-1221", 85812, 100, 90));
