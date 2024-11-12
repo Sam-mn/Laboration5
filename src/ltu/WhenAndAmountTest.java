@@ -1,8 +1,13 @@
 package ltu;
 
+import java.io.Console;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.annotation.IncompleteAnnotationException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import org.junit.Before;
@@ -13,6 +18,7 @@ public class WhenAndAmountTest
     private PaymentImpl test = null;
     private String idNoLoan = "19750615-5441";
     private String idWithLoan = "19900615-5441";
+    public MockCalendar cal = new MockCalendar();
 
     private class Student {
         public String id = idNoLoan;
@@ -32,15 +38,13 @@ public class WhenAndAmountTest
     }
 
     private void SetDate(int year, int month, int day) {
-        // ICalendar cal = CalendarFactory.getCalendar("Calendar");
-        // cal.set(year, month, day);
-        // test = new PaymentImpl(cal);
+        cal.SetDate(year, month, day);
     }
 
     @Before
     public void start() throws IOException
     {
-        test = new PaymentImpl(new CalendarImpl());
+        test = new PaymentImpl(cal);
     }
 
     @Test
@@ -178,5 +182,16 @@ public class WhenAndAmountTest
         SetId(idWithLoan);
         SetStudyRate(50);
         assertEquals(test.getMonthlyAmount(student.id, student.income, student.studyRate, student.completionRatio), 4960);
+    }
+
+    @Test
+    public void testCalendar506A() throws IOException
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2024, 0, 12);
+        String paymentDay = test.getNextPaymentDay();
+        PaymentImpl impl = new PaymentImpl(new CalendarImpl());
+        assertEquals(paymentDay, impl.getNextPaymentDay());
     }
 }
