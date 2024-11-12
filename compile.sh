@@ -6,7 +6,7 @@ else
 fi
 
 echo "Compiling code..."
-javac -d ./bin -cp ./src ./src/ltu/Main.java ./src/ltu/CalendarImpl.java
+javac -d ./bin -cp ./src ./src/ltu/Main.java ./src/ltu/CalendarImpl.java ./src/ltu/MockCalendar.java
 
 echo "Compiling tests..."
 javac -d ./bin -cp ./lib/org.junit4-4.3.1.jar${SEP}./src ./src/ltu/PaymentTest.java

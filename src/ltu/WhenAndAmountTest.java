@@ -1,8 +1,13 @@
 package ltu;
 
+import java.io.Console;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.annotation.IncompleteAnnotationException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import org.junit.Before;
@@ -13,6 +18,7 @@ public class WhenAndAmountTest
     private PaymentImpl test = null;
     private String idNoLoan = "19750615-5441";
     private String idWithLoan = "19900615-5441";
+    public MockCalendar cal = new MockCalendar();
 
     private class Student {
         public String id = idNoLoan;
@@ -32,15 +38,13 @@ public class WhenAndAmountTest
     }
 
     private void SetDate(int year, int month, int day) {
-        // ICalendar cal = CalendarFactory.getCalendar("Calendar");
-        // cal.set(year, month, day);
-        // test = new PaymentImpl(cal);
+        cal.SetDate(year, month, day);
     }
 
     @Before
     public void start() throws IOException
     {
-        test = new PaymentImpl(new CalendarImpl());
+        test = new PaymentImpl(cal);
     }
 
     @Test
@@ -178,5 +182,45 @@ public class WhenAndAmountTest
         SetId(idWithLoan);
         SetStudyRate(50);
         assertEquals(test.getMonthlyAmount(student.id, student.income, student.studyRate, student.completionRatio), 4960);
+    }
+
+    @Test
+    public void testCalendar506A()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 1, 1);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506B()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 1, 31);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506C()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 1, 30);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506D()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 2, 1);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160229");
     }
 }
