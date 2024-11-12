@@ -185,13 +185,42 @@ public class WhenAndAmountTest
     }
 
     @Test
-    public void testCalendar506A() throws IOException
+    public void testCalendar506A()
     {
         SetId(idWithLoan);
         SetStudyRate(50);
-        SetDate(2024, 0, 12);
+        SetDate(2016, 1, 1);
         String paymentDay = test.getNextPaymentDay();
-        PaymentImpl impl = new PaymentImpl(new CalendarImpl());
-        assertEquals(paymentDay, impl.getNextPaymentDay());
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506B()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 1, 31);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506C()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 1, 30);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160129");
+    }
+
+    @Test
+    public void testCalendar506D()
+    {
+        SetId(idWithLoan);
+        SetStudyRate(50);
+        SetDate(2016, 2, 1);
+        String paymentDay = test.getNextPaymentDay();
+        assertEquals(paymentDay, "20160229");
     }
 }
