@@ -103,7 +103,7 @@ public class PaymentTest
     @Test
     public void testMoreThanFullTimeMaxIncome85814Sek301()
     {
-        assertEquals(0, test.getMonthlyAmount("20040323-1221", 85813, 101, 90));
+        assertEquals(0, test.getMonthlyAmount("20040323-1221", 85814, 101, 90));
     }
 
     @Test
@@ -134,5 +134,11 @@ public class PaymentTest
     public void testHalfTimeMaxIncome129000Sek302()
     {
         assertEquals(0, test.getMonthlyAmount("20040323-1221", 129000, 50, 90));
+    }
+
+    @Test
+    public void testCompletionRatioLessThan50Percent401()
+    {
+        assertEquals(0, test.getMonthlyAmount("20040323-1221", 128722, 49, 49));
     }
 }
